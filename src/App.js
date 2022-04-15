@@ -4,6 +4,8 @@ import React from 'react';
 //import { withStyles } from '@material-ui/core/styles';
 //import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import {AppBar, Typography, TextField, Button, Input} from '@material-ui/core';
+import {Tabs, Tab} from '@material-ui/core';
+import TabPanel from './TabPanel.js';
 //import AppBar from '@material-ui/core/AppBar';
 //import Toolbar from '@material-ui/core/Toolbar';
 //import MenuIcon from '@material-ui/icons/Menu';
@@ -23,6 +25,7 @@ export default class App extends React.Component {
         this.state = {
             music_list : {},
             searchWord : '',
+            value : 0,
         }
     }
 
@@ -44,14 +47,23 @@ export default class App extends React.Component {
       }).catch(e => console.log('error when search musician'));
     }
 
+    handleTabs = (e,val) => {
+      this.setState({value : val});
+      console.warn("val");
+    }
+
     render () {
         return (
             <div>
-              <AppBar position="fixed">
+              <AppBar position="static">
                   <Typography align="center" variant="h3" color="inherit">Your Favorite Musics</Typography>
+                  <Tabs value ={this.state.value} onChange = {this.handleTabs}>
+                    <Tab label = "Music List"/>
+                    <Tab label = "Likes Music"/>
+                  </Tabs>
               </AppBar>
-              
-              <div style={{height: 60, width: '100%'}}></div>
+              <TabPanel value={this.state.value} index={0}>
+                <div style={{height: 10, width: '100%'}}></div>
               <form style={{display: 'flex', marginBottom : 20}}>
 
               <div style={{display : 'flex', marginLeft : 'auto', marginRight : 'auto',}}>
@@ -70,6 +82,8 @@ export default class App extends React.Component {
 
                   </MusicList>
               }
+              </TabPanel>
+              <TabPanel value={this.state.value} index={1}>Tab 2 Detail</TabPanel>
 
             </div>
         );
