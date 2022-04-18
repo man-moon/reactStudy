@@ -40644,9 +40644,15 @@ var App = /*#__PURE__*/function (_React$Component) {
         value: this.state.value,
         onChange: this.handleTabs
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__.default, {
-        label: "Music List"
+        label: "Music List",
+        style: {
+          minWidth: "50%"
+        }
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_7__.default, {
-        label: "Likes Music"
+        label: "Likes Music",
+        style: {
+          minWidth: "50%"
+        }
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_TabPanel_js__WEBPACK_IMPORTED_MODULE_1__.default, {
         value: this.state.value,
         index: 0

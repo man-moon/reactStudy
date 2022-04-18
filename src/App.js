@@ -58,8 +58,8 @@ export default class App extends React.Component {
               <AppBar position="static">
                   <Typography align="center" variant="h3" color="inherit">Your Favorite Musics</Typography>
                   <Tabs value ={this.state.value} onChange = {this.handleTabs}>
-                    <Tab label = "Music List"/>
-                    <Tab label = "Likes Music"/>
+                    <Tab label = "Music List"  style={{minWidth:"50%"}}/>
+                    <Tab label = "Likes Music"  style={{minWidth:"50%"}}/>
                   </Tabs>
               </AppBar>
               <TabPanel value={this.state.value} index={0}>
