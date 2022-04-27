@@ -6,6 +6,7 @@ import React from 'react';
 import {AppBar, Typography, TextField, Button, Input} from '@material-ui/core';
 import {Tabs, Tab} from '@material-ui/core';
 import TabPanel from './TabPanel.js';
+import LikeMusicList from './LikeMusicList.js';
 //import AppBar from '@material-ui/core/AppBar';
 //import Toolbar from '@material-ui/core/Toolbar';
 //import MenuIcon from '@material-ui/icons/Menu';
@@ -83,7 +84,12 @@ export default class App extends React.Component {
                   </MusicList>
               }
               </TabPanel>
-              <TabPanel value={this.state.value} index={1}>Tab 2 Detail</TabPanel>
+              <TabPanel value={this.state.value} index={1}>
+                <LikeMusicList>
+
+                </LikeMusicList>
+              Tab 2 Detail
+              </TabPanel>
 
             </div>
         );
