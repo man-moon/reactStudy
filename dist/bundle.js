@@ -40968,6 +40968,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var useStyles = (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["default"])(function (theme) {
   return {
     root: {
@@ -40997,6 +40998,11 @@ var useStyles = (0,_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["defaul
     }
   };
 });
+
+function clickArrowButton(e) {
+  window.location.href = "https://www.youtube.com/results?search_query=";
+}
+
 function MediaControlCard(props) {
   console.log("hi!");
   console.log(props);
@@ -41019,7 +41025,10 @@ function MediaControlCard(props) {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_6__["default"], {
     "aria-label": "previous"
   }, theme.direction === 'rtl' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_material_ui_icons_SkipNext__WEBPACK_IMPORTED_MODULE_7__["default"], null) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_material_ui_icons_SkipPrevious__WEBPACK_IMPORTED_MODULE_8__["default"], null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    "aria-label": "play/pause"
+    "aria-label": "play/pause",
+    onClick: function onClick() {
+      return window.open("https://www.youtube.com/results?search_query=".concat(props.val.collectionCensoredName));
+    }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_material_ui_icons_PlayArrow__WEBPACK_IMPORTED_MODULE_9__["default"], {
     className: classes.playIcon
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_6__["default"], {

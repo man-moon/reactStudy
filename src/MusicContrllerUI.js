@@ -37,6 +37,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+function clickArrowButton(e){
+  window.location.href = `https://www.youtube.com/results?search_query=`
+}
+
 export default function MediaControlCard(props) {
     console.log("hi!");
     console.log(props);
@@ -58,7 +62,7 @@ export default function MediaControlCard(props) {
           <IconButton aria-label="previous">
             {theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
           </IconButton>
-          <IconButton aria-label="play/pause">
+          <IconButton aria-label="play/pause" onClick={() => window.open(`https://www.youtube.com/results?search_query=${props.val.collectionCensoredName}`)}>
             <PlayArrowIcon className={classes.playIcon} />
           </IconButton>
           <IconButton aria-label="next">
