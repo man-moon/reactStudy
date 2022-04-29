@@ -36,15 +36,16 @@ class MusicList extends React.Component {
     toggleFavorite = (id) => () => {
         let {likes} = this.state;
         console.log(id, likes[id]);
-        if(likes[id] == undefined) {
+        let db = firebase.firestore();
+        if (likes[id] == undefined) {
             likes[id] = true;
+            db.collection('likes').doc(String(id)).set({ like: likes[id] });
         }
         else {
+            db.collection('likes').doc(String(id)).delete();
             likes[id] = (likes[id]) ? false : true;
         }
 
-        let db = firebase.firestore();
-        db.collection('likes').doc(String(id)).set({like : likes[id]});
         
         
         try {
