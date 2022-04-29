@@ -5,18 +5,26 @@ import {Card, CardContent, CardActions, Typography, IconButton} from '@material-
 import firebase from './firebase';
 
 class LikeMusicList extends React.Component{
- 
-  render () {
+  
+  state = {
+    list: []
+  }
+  
+  componentDidMount() {
     let db = firebase.firestore();
     let snapshot = db.collection("likes");
-    let list = []
+    let newList = [];
 
-    snapshot.get().then(function(querySnapshot) {
+    snapshot.get().then((querySnapshot) => {
       if (querySnapshot) {
-        querySnapshot.forEach(function(item){
-          //doc.id로 id 접근 가능
+        querySnapshot.forEach((item) => {
           fetch(`https://itunes.apple.com/lookup?id=${item.id}&entity=album`).then(r => r.json()).then(r => {
-            list.push(r.results[0]);
+            newList = this.state.list
+            newList.push(r.results);
+            this.setState({
+              list: newList,
+            })
+            console.log(this.state.list)
           }).catch(e => console.log(e));
         })
       }
@@ -26,20 +34,24 @@ class LikeMusicList extends React.Component{
     }).catch(function(error) {
         console.log("Error getting document:", error);
     });
-    //console.log(list);
 
-    ///*** 여기서부터 list 인식을 못 함.. ***/
+  }
+ 
+  render () {
+    let idx = 0;
     return (
       <div>
-          {list.map(item => {
-            <Card key={item.collectionId} className={classes.card}>
+          {this.state.list&&this.state.list.map(item => {
+            return (
+            <Card key={item[0].collectionId}>
               <CardContent>
-                  <Typography variant="subtitle1"> {item.artistName}</Typography>
-                  <Typography variant="subtitle2"> {item.collectionCensoredName}</Typography>
+                  <Typography variant="subtitle1"> {item[0].artistName}</Typography>
+                  <Typography variant="subtitle2"> {item[0].collectionCensoredName}</Typography>
               </CardContent>
-              <img src = {item.collectionViewUrl} alt = {item.collectionName}></img>
-            </Card>
+              <img src = {item[0].collectionViewUrl} alt = {item[0].collectionName}></img>
+            </Card>)
           })}
+        {console.log(this.state.list)}
       </div>
     );
   };

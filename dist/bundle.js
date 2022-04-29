@@ -40359,6 +40359,8 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -40370,25 +40372,45 @@ var LikeMusicList = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(LikeMusicList);
 
   function LikeMusicList() {
+    var _this;
+
     _classCallCheck(this, LikeMusicList);
 
-    return _super.apply(this, arguments);
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _super.call.apply(_super, [this].concat(args));
+
+    _defineProperty(_assertThisInitialized(_this), "state", {
+      list: []
+    });
+
+    return _this;
   }
 
   _createClass(LikeMusicList, [{
-    key: "render",
-    value: function render() {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
       var db = _firebase__WEBPACK_IMPORTED_MODULE_1__["default"].firestore();
       var snapshot = db.collection("likes");
-      var list = [];
+      var newList = [];
       snapshot.get().then(function (querySnapshot) {
         if (querySnapshot) {
           querySnapshot.forEach(function (item) {
-            //doc.id로 id 접근 가능
             fetch("https://itunes.apple.com/lookup?id=".concat(item.id, "&entity=album")).then(function (r) {
               return r.json();
             }).then(function (r) {
-              list.push(r.results[0]);
+              newList = _this2.state.list;
+              newList.push(r.results);
+
+              _this2.setState({
+                list: newList
+              });
+
+              console.log(_this2.state.list);
             })["catch"](function (e) {
               return console.log(e);
             });
@@ -40398,23 +40420,24 @@ var LikeMusicList = /*#__PURE__*/function (_React$Component) {
         }
       })["catch"](function (error) {
         console.log("Error getting document:", error);
-      }); //console.log(list);
-      ///*** 여기서부터 list 인식을 못 함.. ***/
-
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, list.map(function (item) {
-        /*#__PURE__*/
-        react__WEBPACK_IMPORTED_MODULE_0__.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["default"], {
-          key: item.collectionId,
-          className: classes.card
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var idx = 0;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, this.state.list && this.state.list.map(function (item) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          key: item[0].collectionId
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_3__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["default"], {
           variant: "subtitle1"
-        }, " ", item.artistName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        }, " ", item[0].artistName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_4__["default"], {
           variant: "subtitle2"
-        }, " ", item.collectionCensoredName)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-          src: item.collectionViewUrl,
-          alt: item.collectionName
+        }, " ", item[0].collectionCensoredName)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+          src: item[0].collectionViewUrl,
+          alt: item[0].collectionName
         }));
-      }));
+      }), console.log(this.state.list));
     }
   }]);
 
