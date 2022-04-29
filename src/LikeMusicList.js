@@ -38,7 +38,6 @@ class LikeMusicList extends React.Component{
   }
  
   render () {
-    let idx = 0;
     return (
       <div>
           {this.state.list&&this.state.list.map(item => {
@@ -48,7 +47,7 @@ class LikeMusicList extends React.Component{
                   <Typography variant="subtitle1"> {item[0].artistName}</Typography>
                   <Typography variant="subtitle2"> {item[0].collectionCensoredName}</Typography>
               </CardContent>
-              <img src = {item[0].collectionViewUrl} alt = {item[0].collectionName}></img>
+              <img src = {item[0].artworkUrl100} alt = {item[0].collectionName}></img>
             </Card>)
           })}
         {console.log(this.state.list)}
