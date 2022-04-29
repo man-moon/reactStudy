@@ -40534,17 +40534,17 @@ var MusicList = /*#__PURE__*/function (_React$Component) {
       return function () {
         var likes = _this.state.likes;
         console.log(id, likes[id]);
+        var db = _firebase__WEBPACK_IMPORTED_MODULE_1__["default"].firestore();
 
         if (likes[id] == undefined) {
           likes[id] = true;
+          db.collection('likes').doc(String(id)).set({
+            like: likes[id]
+          });
         } else {
+          db.collection('likes').doc(String(id))["delete"]();
           likes[id] = likes[id] ? false : true;
         }
-
-        var db = _firebase__WEBPACK_IMPORTED_MODULE_1__["default"].firestore();
-        db.collection('likes').doc(String(id)).set({
-          like: likes[id]
-        });
 
         try {
           var ref = db.collection('likes').doc(String(id));
