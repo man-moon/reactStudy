@@ -88,7 +88,6 @@ export default class App extends React.Component {
                 <LikeMusicList>
 
                 </LikeMusicList>
-              Tab 2 Detail
               </TabPanel>
 
             </div>
