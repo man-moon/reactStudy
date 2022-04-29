@@ -3,7 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import {Card, CardContent, CardActions, Typography, IconButton} from '@material-ui/core';
 
 import firebase from './firebase';
-import Lululala from './Lululala';
+import MusicContrllerUI from './MusicContrllerUI';
 
 class LikeMusicList extends React.Component{
   
@@ -42,9 +42,9 @@ class LikeMusicList extends React.Component{
       <div>
           {this.state.list&&this.state.list.map(item => {
             return (
-            <Lululala key={item[0].collectionId} val={item[0]}>
+            <MusicContrllerUI key={item[0].collectionId} val={item[0]}>
 
-            </Lululala>
+            </MusicContrllerUI>
             )
           })}
       </div>
