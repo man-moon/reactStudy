@@ -3,6 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import {Card, CardContent, CardActions, Typography, IconButton} from '@material-ui/core';
 
 import firebase from './firebase';
+import Lululala from './Lululala';
 
 class LikeMusicList extends React.Component{
   
@@ -24,7 +25,6 @@ class LikeMusicList extends React.Component{
             this.setState({
               list: newList,
             })
-            console.log(this.state.list)
           }).catch(e => console.log(e));
         })
       }
@@ -42,15 +42,11 @@ class LikeMusicList extends React.Component{
       <div>
           {this.state.list&&this.state.list.map(item => {
             return (
-            <Card key={item[0].collectionId}>
-              <CardContent>
-                  <Typography variant="subtitle1"> {item[0].artistName}</Typography>
-                  <Typography variant="subtitle2"> {item[0].collectionCensoredName}</Typography>
-              </CardContent>
-              <img src = {item[0].artworkUrl100} alt = {item[0].collectionName}></img>
-            </Card>)
+            <Lululala key={item[0].collectionId} val={item[0]}>
+
+            </Lululala>
+            )
           })}
-        {console.log(this.state.list)}
       </div>
     );
   };
